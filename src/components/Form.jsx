@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const Form = (props) => {
   const [toggle, setToggle] = useState(false);
@@ -11,14 +11,16 @@ const Form = (props) => {
         <Button>Submit</Button>
       </div>
 
-      <div></div>
-      <ToggleButton
-        onClick={() => {
-          setToggle(!toggle);
-        }}
-      >
-        -
-      </ToggleButton>
+      <div>
+        <InputBox type="text" placeholder="img URL" />
+        <ToggleButton
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+        >
+          -
+        </ToggleButton>
+      </div>
     </Formed>
   );
 };

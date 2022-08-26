@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import '../App.css';
 
+<<<<<<< HEAD
+=======
+import './App.css';
+
+>>>>>>> hj
 const Info = () => {
   return (
 <StInfoContainer>
