@@ -13,6 +13,7 @@ const Form = (props) => {
     
 
         <div>
+            <InputBox type="text" placeholder="imgURL" />
             <ToggleButton onClick={() => {setToggle(!toggle)}} >-</ToggleButton>
         </div>
     </Formed>
