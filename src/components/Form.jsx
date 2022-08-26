@@ -11,7 +11,6 @@ const Form = (props) => {
         <Button>Submit</Button>
       </div>
 
-
       <div></div>
       <ToggleButton
         onClick={() => {
