@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-
+import { useDispatch } from "react-redux";
+import { addMusic } from "../redux/module/musicSlice";
 const Form = (props) => {
+  const titleInput = useRef(null)
+  const artistInput = useRef(null)
+  const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   return (
     <Formed>
       <div>
-        <InputBox type="text" placeholder="Artist" />
-        <InputBox type="text" placeholder="title" />
-        <Button>Submit</Button>
+        <InputBox ref={artistInput} type="text" placeholder="Artist" />
+        <InputBox ref={titleInput} type="text" placeholder="title" />
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            
+            dispatch(
+              addMusic({
+                id: Date.now(),
+                artist: artistInput.current.value,
+                title: titleInput.current.value,
+                coverUrl: '',                  
+                like: false,
+                comment: [
+                  {
+                    userName: '',
+                    content: '',
+                    commentLike: false,
+                  },
+                ],
+              })
+            );
+          }}
+        >
+          Submit
+        </Button>
       </div>
 
       <div></div>

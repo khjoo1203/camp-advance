@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const Item = () => {
+const Item = ({music}) => {
+  const navigate = useNavigate()
+  const {id, artist, title, like} = music
   return (
     <ItemDiv>
-      <Like>♡♥️</Like>
-      <CoverImg src="https://lh3.googleusercontent.com/PSIZ9cf9hpESZwcSz2ylS5I-zIREqCSagxV-X4CJqefrE0sRCktRtFw-a7PlkLygmg7k1nZREKCaSzY=w544-h544-l90-rj" />
-      <Title>SICKO MODE</Title>
-      <Artist>Travis Scott</Artist>
+      {like?<Like>♥️</Like>:<Like>♡</Like>}
+      <CoverImg onClick={()=>{
+        navigate("/detail/"+id)
+      }} src="https://lh3.googleusercontent.com/PSIZ9cf9hpESZwcSz2ylS5I-zIREqCSagxV-X4CJqefrE0sRCktRtFw-a7PlkLygmg7k1nZREKCaSzY=w544-h544-l90-rj" />
+      <Title>{title}</Title>
+      <Artist>{artist}</Artist>
     </ItemDiv>
   );
 };
