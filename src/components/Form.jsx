@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FormInfo from "./FormInfo";
 import styled from "styled-components";
 
 const Form = (props) => {
@@ -12,11 +11,10 @@ const Form = (props) => {
             <Button>Submit</Button>
         </div>
     
-    
+
         <div>
-            {toggle && <FormInfo />}
-        </div>
             <ToggleButton onClick={() => {setToggle(!toggle)}} >-</ToggleButton>
+        </div>
     </Formed>
    ); 
 }
