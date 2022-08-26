@@ -5,6 +5,7 @@ const Form = (props) => {
     const [toggle, setToggle] = useState(false);
 
    return (
+    
     <Formed>
         <div>
             <InputBox type="text" placeholder="Artist" />
