@@ -17,7 +17,7 @@ const HeaderDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   
-  }
+
 `;
 const HeaderA = styled.a`
 font-family: 'helvetica', cursive;
@@ -28,6 +28,7 @@ font-family: 'helvetica', cursive;
   font-weight: bold;
   &:hover{
     color: white;
+  }
 `;
 
 const LogoImg = styled.img`
