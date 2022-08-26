@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-import FormInfo from "./FormInfo";
-=======
->>>>>>> origin/sub-master
 import styled from "styled-components";
 
 const Form = (props) => {
     const [toggle, setToggle] = useState(false);
-<<<<<<< HEAD
    return (
-=======
-  return (
->>>>>>> origin/sub-master
     <Formed>
         <div>
             <InputBox type="text" placeholder="Artist" />
@@ -19,22 +11,11 @@ const Form = (props) => {
             <Button>Submit</Button>
         </div>
     
-<<<<<<< HEAD
         <div>
-            {toggle && <FormInfo />}
         </div>
             <ToggleButton onClick={() => {setToggle(!toggle)}} >-</ToggleButton>
     </Formed>
    ); 
-=======
-
-        <div>
-            <InputBox type="text" placeholder="imgURL" />
-            <ToggleButton onClick={() => {setToggle(!toggle)}} >-</ToggleButton>
-        </div>
-    </Formed>
-  ); 
->>>>>>> origin/sub-master
 }
 
 export default Form;
