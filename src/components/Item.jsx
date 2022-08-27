@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Item = ({music}) => {
   const navigate = useNavigate()
-  const {id, artist, title, like} = music
+  const {id, artist, title, like, coverUrl} = music
   return (
     <ItemDiv>
       {like?<Like>♥️</Like>:<Like>♡</Like>}
       <CoverImg onClick={()=>{
         navigate("/detail/"+id)
-      }} src="https://lh3.googleusercontent.com/PSIZ9cf9hpESZwcSz2ylS5I-zIREqCSagxV-X4CJqefrE0sRCktRtFw-a7PlkLygmg7k1nZREKCaSzY=w544-h544-l90-rj" />
+      }} src={coverUrl} />
       <Title>{title}</Title>
       <Artist>{artist}</Artist>
     </ItemDiv>

@@ -4,7 +4,7 @@ import Item from "./Item";
 import { useSelector } from "react-redux";
 
 const List = () => {
-  const musicList = useSelector(state=>state.counter.list) 
+  const musicList = useSelector(state=>state.music.list) 
   return (
     <ListDiv>
       {musicList.map((music)=>(

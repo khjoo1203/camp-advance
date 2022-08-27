@@ -1,19 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import '../App.css';
 
-const Info = () => {
+const Info = ({getMusic}) => {
+  const navigate = useNavigate()
   return (
 <StInfoContainer>
       <StAlbumSet>
-        <StAlbumImg src="https://musicmeta-phinf.pstatic.net/album/007/795/7795016.jpg?type=r480Fll&v=20220825145549"/>
-        <StArtist>가수 이름 들어갈 자리</StArtist>
-        <StTiltle>제목 들어갈 자리.</StTiltle>
+        <StAlbumImg src={getMusic.coverUrl}/>
+        <StArtist>{getMusic.artist}</StArtist>
+        <StTiltle>{getMusic.title}</StTiltle>
       </StAlbumSet>
       <StButtonSet>
         <StLike>♥</StLike>
         <StEachButton>DEL</StEachButton>
-        <StEachButton>Go Back</StEachButton>
+        <StEachButton onClick={()=>{
+          navigate(-1)
+        }}>Go Back</StEachButton> 
       </StButtonSet>
     </StInfoContainer>
   );

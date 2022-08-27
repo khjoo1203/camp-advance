@@ -1,0 +1,43 @@
+{
+  "list": [
+    {
+      "id": "2tXaMRaGvuaHS4v1-8kY6",
+      "artist": "Travis Scott",
+      "title": "SICKO MODE",
+      "coverUrl": "https://lh3.googleusercontent.com/PSIZ9cf9hpESZwcSz2ylS5I-zIREqCSagxV-X4CJqefrE0sRCktRtFw-a7PlkLygmg7k1nZREKCaSzY=w544-h544-l90-rj",
+      "like": false,
+      "comments": []
+    },
+    {
+      "id": "asdfwae324",
+      "artist": "Future",
+      "title": "Mask Off",
+      "coverUrl": "https://lh3.googleusercontent.com/OVejVpqP0cLGa4KySJCYsUVL1q9OjNf3tNUZPlZViPz_VxcxFRcAY4EmLwxfAlzvF2z_YCOj1iCC61gGjw=w544-h544-l90-rj",
+      "like": false,
+      "comments": []
+    },
+    {
+      "id": "FHjATPMS84fIJuqAajXdh",
+      "artist": "Loden in NY",
+      "title": "The Magic Room",
+      "coverUrl": "https://lh3.googleusercontent.com/ssNTRB3k8rV3pKEE9VdL6951Pxm_HoPLzNAj5T5_28lPENsm2qg1oiJafC77uBldaFTt7ZhO7Ud_wBremQ=w544-h544-l90-rj",
+      "like": false,
+      "comments": [
+        {
+          "id": "",
+          "userName": "",
+          "content": "",
+          "commentLike": false
+        }
+      ]
+    },
+    {
+      "id": "2t8g2rSKLjDOZD21DRQjB",
+      "artist": "asd",
+      "title": "asd",
+      "coverUrl": "ads",
+      "like": false,
+      "comments": []
+    }
+  ]
+}

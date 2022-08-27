@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { addMusic } from "../redux/module/musicSlice";
+// import { addMusic } from "../redux/module/musicSlice"; //로컬
+import { createMusic } from "../redux/module/musicSlice";
 import { nanoid } from "@reduxjs/toolkit";
 const Form = (props) => {
   const titleInput = useRef(null);
   const artistInput = useRef(null);
+  const ImgUrlInput = useRef(null);
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   return (
@@ -14,23 +16,23 @@ const Form = (props) => {
         <div>
           <InputBox ref={artistInput} type="text" placeholder="Artist" />
           <InputBox ref={titleInput} type="text" placeholder="title" />
+          <InputBox
+            length="500px"
+            ref={ImgUrlInput}
+            type="text"
+            placeholder="title"
+          />
           <Button
             onClick={(e) => {
               e.preventDefault();
               dispatch(
-                addMusic({
+                createMusic({
                   id: nanoid(),
                   artist: artistInput.current.value,
                   title: titleInput.current.value,
-                  coverUrl: "",
+                  coverUrl: ImgUrlInput.current.value,
                   like: false,
-                  comment: [
-                    {
-                      userName: "",
-                      content: "",
-                      commentLike: false,
-                    },
-                  ],
+                  comments: [],
                 })
               );
               setToggle(!toggle);
@@ -70,6 +72,7 @@ const InputBox = styled.input`
   border-radius: 20px;
   border: none;
   outline: none;
+  width: ${(props) => props.length};
   &::placeholder {
     color: #ccc;
   }
