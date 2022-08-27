@@ -2,49 +2,51 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { addMusic } from "../redux/module/musicSlice";
+import { nanoid } from "@reduxjs/toolkit";
 const Form = (props) => {
-  const titleInput = useRef(null)
-  const artistInput = useRef(null)
+  const titleInput = useRef(null);
+  const artistInput = useRef(null);
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   return (
     <Formed>
-      <div>
-        <InputBox ref={artistInput} type="text" placeholder="Artist" />
-        <InputBox ref={titleInput} type="text" placeholder="title" />
-        <Button
-          onClick={(e) => {
-            e.preventDefault()
-            
-            dispatch(
-              addMusic({
-                id: Date.now(),
-                artist: artistInput.current.value,
-                title: titleInput.current.value,
-                coverUrl: '',                  
-                like: false,
-                comment: [
-                  {
-                    userName: '',
-                    content: '',
-                    commentLike: false,
-                  },
-                ],
-              })
-            );
-          }}
-        >
-          Submit
-        </Button>
-      </div>
-
-      <div></div>
+      {toggle ? (
+        <div>
+          <InputBox ref={artistInput} type="text" placeholder="Artist" />
+          <InputBox ref={titleInput} type="text" placeholder="title" />
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(
+                addMusic({
+                  id: nanoid(),
+                  artist: artistInput.current.value,
+                  title: titleInput.current.value,
+                  coverUrl: "",
+                  like: false,
+                  comment: [
+                    {
+                      userName: "",
+                      content: "",
+                      commentLike: false,
+                    },
+                  ],
+                })
+              );
+              setToggle(!toggle);
+            }}
+          >
+            Submit
+          </Button>
+        </div>
+      ) : null}
       <ToggleButton
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           setToggle(!toggle);
         }}
       >
-        -
+        ↕️
       </ToggleButton>
     </Formed>
   );
@@ -85,6 +87,7 @@ const ToggleButton = styled.button`
   width: 50px;
   height: 30px;
   color: #fff;
+  font-size: 18px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
