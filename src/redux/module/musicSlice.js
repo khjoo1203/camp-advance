@@ -18,6 +18,9 @@ export const createMusic = createAsyncThunk("music/createMusic", async (newMusic
   return response.data
 })
 
+export const postComment = createAsyncThunk("music/postComment", async (newComment) => {
+  const response = await axios.post('http://localhost:5001/list',newComment)
+})
 const musicSlice = createSlice({
   name: "music",
   initialState,

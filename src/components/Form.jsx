@@ -25,6 +25,12 @@ const Form = (props) => {
           <Button
             onClick={(e) => {
               e.preventDefault();
+              if (
+                !artistInput.current.value ||
+                !titleInput.current.value ||
+                !ImgUrlInput.current.value
+              )
+                return;
               dispatch(
                 createMusic({
                   id: nanoid(),
@@ -42,14 +48,23 @@ const Form = (props) => {
           </Button>
         </div>
       ) : null}
+      {toggle?
       <ToggleButton
-        onClick={(e) => {
-          e.preventDefault();
-          setToggle(!toggle);
-        }}
+      onClick={(e) => {
+        e.preventDefault();
+        setToggle(!toggle);
+      }}
+      >
+        -
+      </ToggleButton>
+      :<ToggleButton
+      onClick={(e) => {
+        e.preventDefault();
+        setToggle(!toggle);
+      }}
       >
         ↕️
-      </ToggleButton>
+      </ToggleButton>}
     </Formed>
   );
 };
@@ -59,39 +74,38 @@ export default Form;
 const Formed = styled.form`
   max-width: 1200px;
   min-width: 800px;
-  background-color: #ccc;
-  margin: 0 auto;
+  margin: 20px auto;
+  
 `;
 
 const InputBox = styled.input`
+  margin: 30px;
   padding: 8px 10px;
-  background-color: #764abc;
-  line-height: 20px;
-  font-size: 16px;
-  color: #fff;
-  border-radius: 20px;
+  font-size: 20px;
   border: none;
-  outline: none;
+  border-bottom: 3px solid #764abc;
   width: ${(props) => props.length};
   &::placeholder {
-    color: #ccc;
+    color: #aaa;
   }
 `;
 
 const Button = styled.button`
-  background-color: #764abc;
   padding: 10px;
-  color: #fff;
+  background-color: transparent;
+  font-size:20px;
+  color: #764abc;
   border-radius: 20px;
   border: none;
 `;
 
 const ToggleButton = styled.button`
+  margin: 20px;
+
   width: 50px;
   height: 30px;
   color: #fff;
   font-size: 18px;
-  border-radius: 30px;
   border: none;
   cursor: pointer;
   background-color: #764abc;

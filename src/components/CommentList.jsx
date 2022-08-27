@@ -1,25 +1,29 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
-const CommentList = ({comments}) => {
+const CommentList = ({ comments }) => {
   return (
-    <CommentListBox>
-      {comments.map((comment) => (
-        <div key={comment.id}>
-        <span>{comment.userName}</span>
-        <p>{comment.content}</p>
-      {comment.like?<CommentLike>♥️</CommentLike>:<CommentLike>♡</CommentLike>}
-        <button>Del</button>
-        </div>
+    <>
+      {comments?.map((comment) => (
+        <CommentListBox key={comment.id}>
+          <span>{comment.userName}</span>
+          <p>{comment.content}</p>
+          {comment.like ? (
+            <CommentLike>♥️</CommentLike>
+          ) : (
+            <CommentLike>♡</CommentLike>
+          )}
+          <DelButton>Del</DelButton>
+        </CommentListBox>
       ))}
-    </CommentListBox>
+    </>
   );
 };
 
 export default CommentList;
 
 const CommentListBox = styled.div`
-  height: 100px;
+  height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -27,6 +31,18 @@ const CommentListBox = styled.div`
 `;
 
 const CommentLike = styled.span`
-  font-size: 30px;
-  color: red;
+  font-size: 20px;
+  color: #fa1e2d;
+`;
+
+const DelButton = styled.button`
+  padding: 10px;
+  background-color: transparent;
+  font-size: 15px;
+  color: #764abc;
+  border-radius: 20px;
+  border: none;
+  &:hover {
+    color: black;
+  }
 `;
