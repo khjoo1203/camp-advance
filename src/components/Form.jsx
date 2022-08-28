@@ -55,7 +55,7 @@ const Form = (props) => {
         setToggle(!toggle);
       }}
       >
-        -
+        Close
       </ToggleButton>
       :<ToggleButton
       onClick={(e) => {
@@ -63,7 +63,7 @@ const Form = (props) => {
         setToggle(!toggle);
       }}
       >
-        ↕️
+        Open Form
       </ToggleButton>}
     </Formed>
   );
@@ -84,6 +84,7 @@ const InputBox = styled.input`
   font-size: 20px;
   border: none;
   border-bottom: 3px solid #764abc;
+  :focus { outline: none; }
   width: ${(props) => props.length};
   &::placeholder {
     color: #aaa;
@@ -93,20 +94,32 @@ const InputBox = styled.input`
 const Button = styled.button`
   padding: 10px;
   background-color: transparent;
+  width: 100px;
+  height: 50px;
   font-size:20px;
   color: #764abc;
-  border-radius: 20px;
+  border-radius: 5px;
   border: none;
+  transition: .5s;
+  &:hover{
+    background-color: #764abc;
+    color: white;
+  }
 `;
 
 const ToggleButton = styled.button`
   margin: 20px;
-
-  width: 50px;
-  height: 30px;
+  width: 100px;
+  height: 50px;
   color: #fff;
   font-size: 18px;
   border: none;
   cursor: pointer;
   background-color: #764abc;
+  transition: .5s;
+  border-radius: 5px;
+  &:hover{
+    background-color: transparent;
+    color: #764abc;
+  }
 `;

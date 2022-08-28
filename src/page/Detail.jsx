@@ -10,11 +10,9 @@ import styled from "styled-components";
 const Detail = () => {
   
   const { id } = useParams();
-  console.log(id);
   const getMusic = useSelector((state) =>
     state.music.list.find((music) => music.id === id)
   ); //crud의 read 필요없음.
-  console.log(getMusic);
   return (
     <DetailPage>
       <Header/>
@@ -29,4 +27,5 @@ const DetailPage = styled.div`
   min-width: 800px;
   margin: auto;
 `
+
 export default Detail;

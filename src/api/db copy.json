@@ -20,9 +20,8 @@
       "artist": "Boris Brejcha",
       "title": "Gravity(feat. Laura Korinth)",
       "coverUrl": "https://lh3.googleusercontent.com/bNtmazZnxYhyoqHL3o9slOlqPhnTu7NvWvEUxp1tjVcLIp5YQoT8NppwftVM0Ll15LxgQs1PHbcaV5kX=w544-h544-l90-rj",
-      "like": true,
-      "comments": [],
-      "true": ""
+      "like": false,
+      "comments": []
     },
     {
       "id": "D8HJFTvFJXoqyHlwLbdUA",
@@ -38,8 +37,7 @@
       "title": "Losing it",
       "coverUrl": "https://lh3.googleusercontent.com/-jLgjaaAjbPdds5-jE3y2TTfTk3p3p7JV9sNNPFC9duVgsojuGAHcW5esx34jZxXcQvOlPRD1dGt7WRpVA=w544-h544-l90-rj",
       "like": false,
-      "comments": [],
-      "true": ""
+      "comments": []
     },
     {
       "id": "dvPgrDdKBsyodQi650r3P",

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import musicReducer from '../module/musicSlice'
+  import musicReducer from '../module/musicSlice'
 
 
 const store = configureStore({
