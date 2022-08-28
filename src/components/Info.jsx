@@ -47,6 +47,7 @@ const StInfoContainer = styled.div`
   margin: 20px auto;
 `;
 const StAlbumSet = styled.div`
+  margin: 30px 0 0 0;
   width: 450px;
 `;
 const StAlbumImg = styled.img`

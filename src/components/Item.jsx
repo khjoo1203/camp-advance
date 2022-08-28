@@ -1,36 +1,48 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleLike } from "../redux/module/musicSlice";
 
-const Item = ({music}) => {
-  const dispatch = useDispatch()
-  const [toggle, setToggle] = useState(false)
-  const navigate = useNavigate()
-  const {id, artist, title, like, coverUrl} = music
+const Item = ({ music }) => {
+  const dispatch = useDispatch();
+  const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
+  const { id, artist, title, like, coverUrl } = music;
   return (
     <ItemDiv>
-      {like?<Like onClick={()=>{
-        dispatch(
-          toggleLike(id, like)
-        )
-        setToggle(!toggle)
-      }}>♥️</Like>:<Like onClick={()=>{
-        dispatch(
-          toggleLike(id, like)
-        )
-        setToggle(!toggle)
-      }}>♡</Like>}
-      <CoverImg onClick={()=>{
-        navigate("/detail/"+id)
-      }} src={coverUrl} />
+      {like ? (
+        <Like
+          onClick={() => {
+            dispatch(toggleLike(id, like));
+            setToggle(!toggle);
+          }}
+        >
+          ♥️
+        </Like>
+      ) : (
+        <Like
+          onClick={() => {
+            dispatch(toggleLike(id, like));
+            setToggle(!toggle);
+          }}
+        >
+          ♡
+        </Like>
+      )}
+      <CoverImg
+        onClick={() => {
+          navigate("/detail/" + id);
+        }}
+        src={coverUrl}
+      />
       <Title>{title}</Title>
       <Artist>{artist}</Artist>
     </ItemDiv>
   );
 };
 const ItemDiv = styled.div`
+  background-color: white;
   margin: 20px auto;
   width: 250px;
   height: 400px;
@@ -42,10 +54,10 @@ const CoverImg = styled.img`
   margin: 20px auto 0;
 `;
 const Title = styled.h2`
-font-size: 20px;
+  font-size: 20px;
 `;
 const Artist = styled.h1`
-font-size: 28px;
+  font-size: 28px;
 `;
 const Like = styled.div`
   position: absolute;

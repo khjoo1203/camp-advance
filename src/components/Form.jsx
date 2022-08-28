@@ -62,7 +62,7 @@ const Form = (props) => {
             e.preventDefault();
             setToggle(!toggle);
           }}
-          buttonName={"Open"}
+          buttonName={"Open Form"}
         />
       )}
     </Formed>

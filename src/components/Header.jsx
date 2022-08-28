@@ -24,9 +24,6 @@ font-family: 'helvetica', cursive;
   text-decoration: none;
   font-size: 35px;
   font-weight: bold;
-  &:hover{
-    color: white;
-  }
 `;
 
 const LogoImg = styled.img`

@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import AllRounderButton from "./AllRounderButton";
 
 const CommentList = ({ comments }) => {
   return (
     <>
       {comments?.map((comment) => (
         <CommentListBox key={comment.id}>
-          <span>{comment.userName}</span>
-          <Paragraph>{comment.content}</Paragraph>
+          <Paragraph length="100px">{comment.userName}</Paragraph>
+          <Paragraph length="240px">{comment.content}</Paragraph>
           {comment.like ? (
             <CommentLike>♥️</CommentLike>
           ) : (
             <CommentLike>♡</CommentLike>
           )}
-          <DelButton>Del</DelButton>
+          <AllRounderButton length={"60px"} buttonName={"delete"} />
         </CommentListBox>
       ))}
     </>
@@ -35,19 +36,7 @@ const CommentLike = styled.span`
   color: #fa1e2d;
 `;
 const Paragraph = styled.p`
-display: inline-block;
-word-wrap: break-word;
-width: 220px;
-`
-
-const DelButton = styled.button`
-  padding: 10px;
-  background-color: transparent;
-  font-size: 15px;
-  color: #764abc;
-  border-radius: 20px;
-  border: none;
-  &:hover {
-    color: black;
-  }
+  display: inline-block;
+  word-wrap: break-word;
+  width: ${(props) => props.length};
 `;
