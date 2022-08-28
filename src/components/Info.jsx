@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteMusic } from "../redux/module/musicSlice";
+import { __deleteMusic, __toggleLike } from "../redux/module/musicSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const Info = ({ getMusic }) => {
   const { coverUrl, artist, title, like, id } = getMusic;
+  const [likeNow, setLikeNow] = useState(like);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteItem = (e) => {
     e.preventDefault();
-    dispatch(deleteMusic(id));
+    dispatch(__deleteMusic(id));
     navigate(-1);
   };
+  const likeHandler = () => {
+    dispatch(__toggleLike(id, setLikeNow({like:!like})))
+    console.log(id)
+    console.log(likeNow)
+  }
   return (
     <StInfoContainer>
       <StAlbumSet>
@@ -22,13 +28,16 @@ const Info = ({ getMusic }) => {
         <StTiltle>{title}</StTiltle>
       </StAlbumSet>
       <StButtonSet>
-        {like ? <StLike>♥️</StLike> : <StLike>♡</StLike>}
+        {like ? <StLike onClick={likeHandler}>♥️</StLike> : <StLike onClick={likeHandler}>♡</StLike>}
         <AllRounderButton
           onClick={() => {
             navigate(-1);
           }}
           buttonName={"Go Back"}
         />
+      </StButtonSet>
+      <StButtonSet>
+        <AllRounderButton buttonName={"Edit"}/>
       </StButtonSet>
       <StButtonSet>
         <AllRounderButton buttonName={"Delete"} onClick={deleteItem} />

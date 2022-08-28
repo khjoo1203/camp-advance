@@ -13,6 +13,8 @@ const List = () => {
   );
 };
 const ListDiv = styled.div`
+  width: 800px;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
 `;

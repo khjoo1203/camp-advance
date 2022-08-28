@@ -5,10 +5,10 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/config/configStore";
-import { fetchMusic } from "./redux/module/musicSlice";
+import { __fetchMusic } from "./redux/module/musicSlice";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-store.dispatch(fetchMusic())
+store.dispatch(__fetchMusic())
 root.render(
   <Provider store={store}>
     <BrowserRouter>

@@ -4,7 +4,7 @@ const AllRounderButton = ({length, onClick, buttonName }) => {
   return <Button length={length} onClick={onClick}>{buttonName}</Button>;
 };
 const Button = styled.button`
-  margin: 5px auto;
+  margin: 5px 2px;
   padding: 10px;
   background-color: transparent;
   width: ${(props) => props.length || "100px"};

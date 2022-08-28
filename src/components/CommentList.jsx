@@ -14,6 +14,7 @@ const CommentList = ({ comments }) => {
           ) : (
             <CommentLike>♡</CommentLike>
           )}
+          <AllRounderButton length={"60px"} buttonName={"edit"} />
           <AllRounderButton length={"60px"} buttonName={"delete"} />
         </CommentListBox>
       ))}

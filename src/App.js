@@ -2,10 +2,16 @@ import "./App.css";
 import Main from "./page/Main";
 import Detail from "./page/Detail";
 import { Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
+import { __fetchMusic } from "./redux/module/musicSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
+const dispatch = useDispatch()
 
+useEffect(()=>{
+  dispatch(__fetchMusic())
+},[dispatch])
   return (
     <div className="App">
       <Routes>

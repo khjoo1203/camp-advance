@@ -2,30 +2,30 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toggleLike } from "../redux/module/musicSlice";
+import { __toggleLike } from "../redux/module/musicSlice";
 
 const Item = ({ music }) => {
   const dispatch = useDispatch();
-  const [toggle, setToggle] = useState(false);
+  const [likeNow, setLikeNow] = useState(music.like);
   const navigate = useNavigate();
+  const likeHandler = () => {
+    dispatch(__toggleLike(id, setLikeNow(!likeNow)))
+    console.log(id)
+    console.log(likeNow)
+    console.log(like)
+  }
   const { id, artist, title, like, coverUrl } = music;
   return (
     <ItemDiv>
       {like ? (
         <Like
-          onClick={() => {
-            dispatch(toggleLike(id, like));
-            setToggle(!toggle);
-          }}
+          onClick={likeHandler}
         >
           ♥️
         </Like>
       ) : (
         <Like
-          onClick={() => {
-            dispatch(toggleLike(id, like));
-            setToggle(!toggle);
-          }}
+          onClick={likeHandler}
         >
           ♡
         </Like>
@@ -54,10 +54,10 @@ const CoverImg = styled.img`
   margin: 20px auto 0;
 `;
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: 17px;
 `;
 const Artist = styled.h1`
-  font-size: 28px;
+  font-size: 25px;
 `;
 const Like = styled.div`
   position: absolute;

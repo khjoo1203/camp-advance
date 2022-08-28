@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 // import { addMusic } from "../redux/module/musicSlice"; //로컬
-import { createMusic } from "../redux/module/musicSlice";
+import { __createMusic } from "../redux/module/musicSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import AllRounderButton from "./AllRounderButton";
 const Form = (props) => {
@@ -15,8 +15,8 @@ const Form = (props) => {
     <Formed>
       {toggle ? (
         <div>
-          <InputBox ref={artistInput} type="text" placeholder="Artist" />
-          <InputBox ref={titleInput} type="text" placeholder="Title" />
+          <InputBox length="300px" ref={artistInput} type="text" placeholder="Artist" />
+          <InputBox length="300px" ref={titleInput} type="text" placeholder="Title" />
           <InputBox
             length="500px"
             ref={ImgUrlInput}
@@ -33,7 +33,7 @@ const Form = (props) => {
               )
                 return;
               dispatch(
-                createMusic({
+                __createMusic({
                   id: nanoid(),
                   artist: artistInput.current.value,
                   title: titleInput.current.value,
