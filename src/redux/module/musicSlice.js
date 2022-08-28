@@ -7,27 +7,27 @@ const initialState = {
 };
 //db에서 데이터 가져옴
 export const fetchMusic = createAsyncThunk("music/fetchMusic", async () => {
-  const response = await axios.get("http://localhost:5001/list");
+  const response = await axios.get("http://localhost:3001/list");
   return response.data;
 });
 // db에 데이터를 넣음
 export const createMusic = createAsyncThunk(
   "music/createMusic",
   async (newMusic) => {
-    const response = await axios.post("http://localhost:5001/list", newMusic);
+    const response = await axios.post("http://localhost:3001/list", newMusic);
     return response.data;
   }
 );
 export const postComment = createAsyncThunk(
   "music/postComment",
   async (newComment) => {
-    const response = await axios.post("http://localhost:5001/list", newComment);
+    const response = await axios.post("http://localhost:3001/list", newComment);
   }
 );
 export const toggleLike = createAsyncThunk(
   "music/toggleLike",
   async (list_id, like_status) => {
-    const response = await axios.patch(`http://localhost:5001/list/${list_id}`, like_status=!like_status);
+    const response = await axios.patch(`http://localhost:3001/list/${list_id}`, like_status=!like_status);
     console.log(response)
     return response.data
   }
@@ -36,7 +36,7 @@ export const toggleLike = createAsyncThunk(
 export const deleteMusic = createAsyncThunk(
   "music/deleteMusic",
   async(list_id)=>{
-    const response = await axios.delete(`http://localhost:5001/list/${list_id}`)
+    const response = await axios.delete(`http://localhost:3001/list/${list_id}`)
     return list_id
   }
 )

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 // import { addMusic } from "../redux/module/musicSlice"; //로컬
 import { createMusic } from "../redux/module/musicSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import AllRounderButton from "./AllRounderButton";
 const Form = (props) => {
   const titleInput = useRef(null);
   const artistInput = useRef(null);
@@ -15,14 +16,14 @@ const Form = (props) => {
       {toggle ? (
         <div>
           <InputBox ref={artistInput} type="text" placeholder="Artist" />
-          <InputBox ref={titleInput} type="text" placeholder="title" />
+          <InputBox ref={titleInput} type="text" placeholder="Title" />
           <InputBox
             length="500px"
             ref={ImgUrlInput}
             type="text"
-            placeholder="title"
+            placeholder="Cover URL"
           />
-          <Button
+          <AllRounderButton
             onClick={(e) => {
               e.preventDefault();
               if (
@@ -43,28 +44,27 @@ const Form = (props) => {
               );
               setToggle(!toggle);
             }}
-          >
-            Submit
-          </Button>
+            buttonName={"Submit"}
+          />
         </div>
       ) : null}
-      {toggle?
-      <ToggleButton
-      onClick={(e) => {
-        e.preventDefault();
-        setToggle(!toggle);
-      }}
-      >
-        Close
-      </ToggleButton>
-      :<ToggleButton
-      onClick={(e) => {
-        e.preventDefault();
-        setToggle(!toggle);
-      }}
-      >
-        Open Form
-      </ToggleButton>}
+      {toggle ? (
+        <AllRounderButton
+          onClick={(e) => {
+            e.preventDefault();
+            setToggle(!toggle);
+          }}
+          buttonName={"Close"}
+        />
+      ) : (
+        <AllRounderButton
+          onClick={(e) => {
+            e.preventDefault();
+            setToggle(!toggle);
+          }}
+          buttonName={"Open"}
+        />
+      )}
     </Formed>
   );
 };
@@ -72,10 +72,8 @@ const Form = (props) => {
 export default Form;
 
 const Formed = styled.form`
-  max-width: 1200px;
-  min-width: 800px;
+  max-width: 600px;
   margin: 20px auto;
-  
 `;
 
 const InputBox = styled.input`
@@ -83,43 +81,12 @@ const InputBox = styled.input`
   padding: 8px 10px;
   font-size: 20px;
   border: none;
-  border-bottom: 3px solid #764abc;
-  :focus { outline: none; }
+  text-align: center;
+  :focus {
+    outline: none;
+  }
   width: ${(props) => props.length};
   &::placeholder {
     color: #aaa;
-  }
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  background-color: transparent;
-  width: 100px;
-  height: 50px;
-  font-size:20px;
-  color: #764abc;
-  border-radius: 5px;
-  border: none;
-  transition: .5s;
-  &:hover{
-    background-color: #764abc;
-    color: white;
-  }
-`;
-
-const ToggleButton = styled.button`
-  margin: 20px;
-  width: 100px;
-  height: 50px;
-  color: #fff;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  background-color: #764abc;
-  transition: .5s;
-  border-radius: 5px;
-  &:hover{
-    background-color: transparent;
-    color: #764abc;
   }
 `;

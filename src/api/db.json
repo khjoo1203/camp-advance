@@ -21,7 +21,14 @@
       "title": "Gravity(feat. Laura Korinth)",
       "coverUrl": "https://lh3.googleusercontent.com/bNtmazZnxYhyoqHL3o9slOlqPhnTu7NvWvEUxp1tjVcLIp5YQoT8NppwftVM0Ll15LxgQs1PHbcaV5kX=w544-h544-l90-rj",
       "like": true,
-      "comments": [],
+      "comments": [
+        {
+          "id": "",
+          "userName": "스파르타",
+          "content": "ㅁㄴㅇ",
+          "commentLike": false
+        }
+      ],
       "true": ""
     },
     {
@@ -169,14 +176,6 @@
       "artist": "The Chainsmokers",
       "title": "Don't Let Me Down(feat. Daya)",
       "coverUrl": "https://lh3.googleusercontent.com/jvgMIjgbvnqnwLwjtqNa0euo9WStdIxrJnpQURgbwuPazT2OpZUdYPZe1gss2fK39oC8ITofFmeGxKY=w544-h544-l90-rj",
-      "like": false,
-      "comments": []
-    },
-    {
-      "id": "OCcq-i31Kn3_QxMIcjTQ7",
-      "artist": "Gnarls Barkley",
-      "title": "Crazy",
-      "coverUrl": "https://lh3.googleusercontent.com/XzQwCLcfC3FdexjRqahNN71PBnX1q5oiEEOTnfI5NZKPTAhOz8XpcLp9GO09lV4WE3lMRn7HLoQTH2fs5A=w544-h544-s-l90-rj",
       "like": false,
       "comments": []
     }

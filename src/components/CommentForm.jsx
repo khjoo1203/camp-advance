@@ -1,26 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import AllRounderButton from "./AllRounderButton";
 
 const CommentForm = () => {
   return (
     <CommentFormBox>
       <div>
-        <CommentFormInput length="150px" type="text" placeholder="Username" />
-        <CommentFormInput length="280px" type="text" placeholder="comment" />
+        <CommentFormInput length="200px" type="text" placeholder="Username" />
+        <CommentFormInput length="400px" type="text" placeholder="comment" />
       </div>
-      <SubmitButton>Submit</SubmitButton>
+      <AllRounderButton buttonName={"Submit"}/>
     </CommentFormBox>
   );
 };
 
 export default CommentForm;
 const CommentFormBox = styled.div`
-  width: 600px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 30px auto;
-  box-shadow: 5px 5px 10px grey;
+  width: 450px;
+  margin: 20px auto;
+  box-shadow: 5px 5px 20px #999;
 `;
 
 const CommentFormInput = styled.input`
@@ -28,21 +26,11 @@ const CommentFormInput = styled.input`
   width: ${(props) => props.length};
   font-size: 18px;
   border: none;
-  :focus { outline: none; }
+  text-align: center;
+  :focus {
+    outline: none;
+  }
   &::placeholder {
     color: #aaa;
-  }
-`;
-const SubmitButton = styled.button`
-  background-color: transparent;
-  font-size: 20px;
-  color: #764abc;
-  border-radius: 5px;
-  height: 35px;
-  border: none;
-  transition:.5s;
-  &:hover{
-    background-color: #764abc;
-    color: white;
   }
 `;

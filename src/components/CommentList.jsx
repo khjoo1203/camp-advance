@@ -7,7 +7,7 @@ const CommentList = ({ comments }) => {
       {comments?.map((comment) => (
         <CommentListBox key={comment.id}>
           <span>{comment.userName}</span>
-          <p>{comment.content}</p>
+          <Paragraph>{comment.content}</Paragraph>
           {comment.like ? (
             <CommentLike>♥️</CommentLike>
           ) : (
@@ -34,6 +34,11 @@ const CommentLike = styled.span`
   font-size: 20px;
   color: #fa1e2d;
 `;
+const Paragraph = styled.p`
+display: inline-block;
+word-wrap: break-word;
+width: 220px;
+`
 
 const DelButton = styled.button`
   padding: 10px;

@@ -16,8 +16,12 @@ const Detail = () => {
   return (
     <DetailPage>
       <Header/>
+      <DetailContent>
       <Info getMusic={getMusic} />
+      </DetailContent>
+      <DetailContent>
       <CommentList comments={getMusic.comments} />
+      </DetailContent>
       <CommentForm />
     </DetailPage>
   );
@@ -27,5 +31,10 @@ const DetailPage = styled.div`
   min-width: 800px;
   margin: auto;
 `
+const DetailContent = styled.div`
+width: 450px;
+margin: auto;
+box-shadow: 5px 5px 10px #999;
 
+`
 export default Detail;

@@ -32,7 +32,7 @@ const Item = ({music}) => {
 };
 const ItemDiv = styled.div`
   margin: 20px auto;
-  width: 310px;
+  width: 250px;
   height: 400px;
   box-shadow: 1px 1px 15px grey;
 `;
@@ -53,7 +53,7 @@ const Like = styled.div`
   height: 30px;
   width: 30px;
   font-size: 24px;
-  transform: translate(120%, 770%);
+  transform: translate(30%, 770%);
   border-radius: 50%;
   color: #fa1e2d;
   box-shadow: 3px 3px 10px black;
