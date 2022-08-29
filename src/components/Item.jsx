@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __updateMusic } from "../redux/module/musicSlice";
 
-const Item = ({ music }) => {
-  const { id, artist, title, like, coverUrl } = music;
+const Item = ({ id, artist, title, like, coverUrl }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -5,26 +5,39 @@ import { useDispatch } from "react-redux";
 import { __deleteMusic, __updateMusic } from "../redux/module/musicSlice";
 import AllRounderButton from "./AllRounderButton";
 
-const Info = ({ getMusic }) => {
+const Info = ({ id, artist, title, coverUrl, like }) => {
+  const [toggle, setToggle] = useState(false);
   const titleInput = useRef(null);
   const artistInput = useRef(null);
   const ImgUrlInput = useRef(null);
   const FormHelp = useRef(null);
-  const [toggle, setToggle] = useState(false);
-  const { coverUrl, artist, title, like, id } = getMusic;
-  const [likeNow, setLikeNow] = useState(like);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const deleteItem = (e) => {
+
+  const deleteHandler = (e) => {
     e.preventDefault();
     dispatch(__deleteMusic(id));
     navigate(-1);
   };
-  const likeHandler = () => {
-    dispatch(__updateMusic(id, setLikeNow({like:!like})))
-    console.log(id)
-    console.log(likeNow)
-  }
+  const updateHandler = (e) => {
+    e.preventDefault();
+    if (
+      !artistInput.current.value ||
+      !titleInput.current.value ||
+      !ImgUrlInput.current.value
+    ) {
+      //TODO: FormHelp 멘트 추가하기
+      return;
+    }
+    const updateMusic = {
+      artist: artistInput.current.value,
+      title: titleInput.current.value,
+      coverUrl: ImgUrlInput.current.value,
+    };
+    dispatch(__updateMusic(updateMusic));
+    setToggle(!toggle);
+  };
   return (
     <StInfoContainer>
       <StAlbumSet>
@@ -33,7 +46,7 @@ const Info = ({ getMusic }) => {
         <StTiltle>{title}</StTiltle>
       </StAlbumSet>
       <StButtonSet>
-        {like ? <StLike onClick={likeHandler}>♥️</StLike> : <StLike onClick={likeHandler}>♡</StLike>}
+        {like ? <StLike>♥️</StLike> : <StLike>♡</StLike>}
         <AllRounderButton
           onClick={() => {
             navigate(-1);
@@ -42,62 +55,51 @@ const Info = ({ getMusic }) => {
         />
       </StButtonSet>
       <StButtonSet>
-      {toggle ? (
-        <EditDiv>
-          <h2>Edit</h2>
-          <InputBox length="300px" ref={artistInput} type="text" placeholder="Artist" />
-          <InputBox length="300px" ref={titleInput} type="text" placeholder="Title" />
-          <InputBox
-            length="300px"
-            ref={ImgUrlInput}
-            type="text"
-            placeholder="Cover URL"
-          />
-          <div ref={FormHelp}></div>
+        {toggle ? (
+          <EditDiv>
+            <h2>Edit</h2>
+            <InputBox
+              length="300px"
+              ref={artistInput}
+              type="text"
+              placeholder="Artist"
+            />
+            <InputBox
+              length="300px"
+              ref={titleInput}
+              type="text"
+              placeholder="Title"
+            />
+            <InputBox
+              length="300px"
+              ref={ImgUrlInput}
+              type="text"
+              placeholder="Cover URL"
+            />
+            <div ref={FormHelp}></div>
+            <AllRounderButton onClick={updateHandler} buttonName={"Submit"} />
+          </EditDiv>
+        ) : null}
+        {toggle ? (
           <AllRounderButton
             onClick={(e) => {
               e.preventDefault();
-              if (
-                !artistInput.current.value ||
-                !titleInput.current.value ||
-                !ImgUrlInput.current.value
-              ) {
-                //TODO: FormHelp 멘트 추가하기
-                return;
-              }
-              dispatch(
-                __updateMusic(id, {
-                  artist: artistInput.current.value,
-                  title: titleInput.current.value,
-                  coverUrl: ImgUrlInput.current.value,
-                })
-              );
               setToggle(!toggle);
             }}
-            buttonName={"Submit"}
+            buttonName={"Close"}
           />
-        </EditDiv>
-      ) : null}
-      {toggle ? (
-        <AllRounderButton
-          onClick={(e) => {
-            e.preventDefault();
-            setToggle(!toggle);
-          }}
-          buttonName={"Close"}
-        />
-      ) : (
-        <AllRounderButton
-          onClick={(e) => {
-            e.preventDefault();
-            setToggle(!toggle);
-          }}
-          buttonName={"Edit"}
-        />
-      )}
+        ) : (
+          <AllRounderButton
+            onClick={(e) => {
+              e.preventDefault();
+              setToggle(!toggle);
+            }}
+            buttonName={"Edit"}
+          />
+        )}
       </StButtonSet>
       <StButtonSet>
-        <AllRounderButton buttonName={"Delete"} onClick={deleteItem} />
+        <AllRounderButton buttonName={"Delete"} onClick={deleteHandler} />
       </StButtonSet>
     </StInfoContainer>
   );
@@ -148,6 +150,5 @@ const InputBox = styled.input`
   }
 `;
 const EditDiv = styled.div`
-box-shadow: 5px 5px 10px #999;
-
-`
+  box-shadow: 5px 5px 10px #999;
+`;

@@ -48,11 +48,11 @@ const Form = (props) => {
               dispatch(
                 __addMusic({
                   id: nanoid(),
-                  artist: artistInput.current.value,
+                  "artist": artistInput.current.value,
                   title: titleInput.current.value,
                   coverUrl: ImgUrlInput.current.value,
                   like: false,
-                  comments: [],
+                  comment: [],
                 })
               );
               setToggle(!toggle);

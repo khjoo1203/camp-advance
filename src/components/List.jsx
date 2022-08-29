@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import Item from "./Item";
 import {  useSelector } from "react-redux";
+
 const List = () => {
-  const musicList = useSelector(state=>state.music.list) 
+  const musicList = useSelector(state=>state.musics.list) 
   
   return (
     <ListDiv>
       {musicList.map((music)=>(
-        <Item music={music} key={music.id}/>
+        <Item {...music} key={music.id}/>
       ))}
     </ListDiv>
   );
