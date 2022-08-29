@@ -13,6 +13,7 @@ const Detail = () => {
   const getMusic = useSelector((state) =>
     state.music.list.find((music) => music.id === id)
   ); //crud의 read 필요없음.
+  
   return (
     <DetailPage>
       <Header/>
@@ -35,6 +36,5 @@ const DetailContent = styled.div`
 width: 450px;
 margin: auto;
 box-shadow: 5px 5px 10px #999;
-
 `
 export default Detail;

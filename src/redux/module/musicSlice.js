@@ -6,34 +6,49 @@ const initialState = {
   currentMusic: [],
 };
 //db에서 데이터 가져옴
-export const __fetchMusic = createAsyncThunk(
-  "music/fetchMusic",
+export const __getMusic = createAsyncThunk(
+  "music/GET_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get("http://localhost:3001/list");
-      return thunkAPI.fulfillWithValue(response.data);
+      const data = await axios.get("http://localhost:3001/list");
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 // db에 데이터를 넣음
-export const __createMusic = createAsyncThunk(
-  "music/createMusic",
-  async (newMusic) => {
-    const response = await axios.post("http://localhost:3001/list", newMusic);
-    return response.data;
+export const __addMusic = createAsyncThunk(
+  "music/ADD_MUSIC",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post("http://localhost:3001/list", payload);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
-export const __postComment = createAsyncThunk(
-  "music/postComment",
-  async (newComment) => {
-    const response = await axios.post("http://localhost:3001/list", newComment);
+//db내 데이터 삭제
+export const __deleteMusic = createAsyncThunk(
+  "music/DELETE_MUSIC",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.delete(`http://localhost:3001/list/${payload}`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+    // async (list_id) => {
+    //   const response = await axios.delete(
+    //     `http://localhost:3001/list/${list_id}`
+    //   );
+    //   return list_id;
   }
 );
 //좋아요 토글
-export const __toggleLike = createAsyncThunk(
-  "music/toggleLike",
+export const __updateMusic = createAsyncThunk(
+  "music/UPDATE_MUSIC",
   async (list_id, like_status) => {
     const response = await axios.patch(
       `http://localhost:3001/list/${list_id}`,
@@ -42,62 +57,67 @@ export const __toggleLike = createAsyncThunk(
     return response.data;
   }
 );
-//db내 데이터 삭제
-export const __deleteMusic = createAsyncThunk(
-  "music/deleteMusic",
-  async (list_id) => {
-    const response = await axios.delete(
-      `http://localhost:3001/list/${list_id}`
-    );
-    return list_id;
+
+export const __postComment = createAsyncThunk(
+  "music/postComment",
+  async (newComment) => {
+    const response = await axios.post("http://localhost:3001/list", newComment);
   }
 );
 
-const musicSlice = createSlice({
+const musics = createSlice({
   name: "music",
   initialState,
-  reducers: {
-    addMusic: (state, action) => {
-      state.list.push(action.payload); //payload=객체
-    },
-    readMusic: (state, action) => {
-      state.currentMusic = state.list.find(
-        (music) => music.id === action.payload
-      );
-    },
-    editMusic: () => {
-      return;
-    },
-    delMusic: (state, action) => {
-      state.list = state.list.filter((music) => music.id !== action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: {
-    [__fetchMusic.pending]: (state, action) => {
+    // TODO getMusic Thunk
+    [__getMusic.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
-      console.log(state.isLoading);
-      console.log("pending");
     },
-    [__fetchMusic.fulfilled]: (state, action) => {
+    [__getMusic.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-      state.list = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣음
-      console.log("fulfilled", state, action);
+      state.list = action.payload; // Store에 있는 list에 서버에서 가져온 music를 넣음
     },
-    [__fetchMusic.rejected]: (state, action) => {
+    [__getMusic.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣음
-      console.log("rejected");
     },
-    [__createMusic.fulfilled]: (state, action) => {
+    // TODO addMusic Thunk
+    [__addMusic.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__addMusic.fulfilled]: (state, action) => {
+      state.isLoading = false;
       state.list.push(action.payload);
     },
-    //delete
-    [__deleteMusic.fulfilled]: (state, action) =>
-      state.list.filter((list) => list.id !== action.payload),
-    [__toggleLike.fulfilled]: (state, action) => {
-      state.list.filter((list) => list.id !== action.payload);
+    [__addMusic.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // TODO deleteMusic Thunk
+    [__deleteMusic.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteMusic.fulfilled]: (state, action) => {
+      state.list.filter((music) => music.id !== action.payload);
+    },
+    [__deleteMusic.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+     // TODO updateMusic Thunk
+     [__updateMusic.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateMusic.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list = state.list.map((music)=> music.id === action.payload.id ? {...action.payload}:music)
+    },
+    [__updateMusic.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
-export const { addMusic, readMusic, delMusic } = musicSlice.actions;
-export default musicSlice.reducer;
+export const {} = musics.actions;
+export default musics.reducer;

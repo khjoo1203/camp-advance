@@ -1,32 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { __toggleLike } from "../redux/module/musicSlice";
+import { __updateMusic } from "../redux/module/musicSlice";
 
 const Item = ({ music }) => {
+  const { id, artist, title, like, coverUrl } = music;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //TODO:  LikeHandler => [on Hold]
   const likeHandler = () => {
-    dispatch(__toggleLike(id, like))
-    console.log(id)
-    console.log(like)
-  }
-  const { id, artist, title, like, coverUrl } = music;
+    dispatch(__updateMusic(id, like));
+    console.log(id);
+    console.log(like);
+  };
   return (
     <ItemDiv>
       {like ? (
         <Like
+          //TODO: [on Hold]
           onClick={likeHandler}
         >
           ♥️
         </Like>
       ) : (
-        <Like
-          onClick={likeHandler}
-        >
-          ♡
-        </Like>
+        <Like onClick={likeHandler}>♡</Like>
       )}
       <CoverImg
         onClick={() => {

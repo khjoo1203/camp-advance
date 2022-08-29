@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { __deleteMusic, __toggleLike } from "../redux/module/musicSlice";
+import { __deleteMusic, __updateMusic } from "../redux/module/musicSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const Info = ({ getMusic }) => {
+  const titleInput = useRef(null);
+  const artistInput = useRef(null);
+  const ImgUrlInput = useRef(null);
+  const FormHelp = useRef(null);
+  const [toggle, setToggle] = useState(false);
   const { coverUrl, artist, title, like, id } = getMusic;
   const [likeNow, setLikeNow] = useState(like);
   const navigate = useNavigate();
@@ -16,7 +21,7 @@ const Info = ({ getMusic }) => {
     navigate(-1);
   };
   const likeHandler = () => {
-    dispatch(__toggleLike(id, setLikeNow({like:!like})))
+    dispatch(__updateMusic(id, setLikeNow({like:!like})))
     console.log(id)
     console.log(likeNow)
   }
@@ -37,7 +42,59 @@ const Info = ({ getMusic }) => {
         />
       </StButtonSet>
       <StButtonSet>
-        <AllRounderButton buttonName={"Edit"}/>
+      {toggle ? (
+        <EditDiv>
+          <h2>Edit</h2>
+          <InputBox length="300px" ref={artistInput} type="text" placeholder="Artist" />
+          <InputBox length="300px" ref={titleInput} type="text" placeholder="Title" />
+          <InputBox
+            length="300px"
+            ref={ImgUrlInput}
+            type="text"
+            placeholder="Cover URL"
+          />
+          <div ref={FormHelp}></div>
+          <AllRounderButton
+            onClick={(e) => {
+              e.preventDefault();
+              if (
+                !artistInput.current.value ||
+                !titleInput.current.value ||
+                !ImgUrlInput.current.value
+              ) {
+                //TODO: FormHelp 멘트 추가하기
+                return;
+              }
+              dispatch(
+                __updateMusic(id, {
+                  artist: artistInput.current.value,
+                  title: titleInput.current.value,
+                  coverUrl: ImgUrlInput.current.value,
+                })
+              );
+              setToggle(!toggle);
+            }}
+            buttonName={"Submit"}
+          />
+        </EditDiv>
+      ) : null}
+      {toggle ? (
+        <AllRounderButton
+          onClick={(e) => {
+            e.preventDefault();
+            setToggle(!toggle);
+          }}
+          buttonName={"Close"}
+        />
+      ) : (
+        <AllRounderButton
+          onClick={(e) => {
+            e.preventDefault();
+            setToggle(!toggle);
+          }}
+          buttonName={"Edit"}
+        />
+      )}
       </StButtonSet>
       <StButtonSet>
         <AllRounderButton buttonName={"Delete"} onClick={deleteItem} />
@@ -76,3 +133,21 @@ const StLike = styled.div`
   font-size: 40px;
   color: #fa1e2d;
 `;
+const InputBox = styled.input`
+  margin: 30px;
+  padding: 8px 10px;
+  font-size: 20px;
+  border: none;
+  text-align: center;
+  :focus {
+    outline: none;
+  }
+  width: ${(props) => props.length};
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+const EditDiv = styled.div`
+box-shadow: 5px 5px 10px #999;
+
+`
