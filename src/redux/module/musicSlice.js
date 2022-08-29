@@ -35,24 +35,25 @@ export const __deleteMusic = createAsyncThunk(
   "music/DELETE_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(`http://localhost:3001/list/${payload}`);
-      return thunkAPI.fulfillWithValue(data.data);
+      const data = await axios.delete(
+        `http://localhost:3001/list/${payload}`
+      );
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-    // async (list_id) => {
-    //   const response = await axios.delete(
-    //     `http://localhost:3001/list/${list_id}`
-    //   );
-    //   return list_id;
   }
 );
+
 //좋아요 토글
 export const __updateMusic = createAsyncThunk(
   "music/UPDATE_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.patch(`http://localhost:3001/list/${payload.id}`, payload);
+      const data = await axios.patch(
+        `http://localhost:3001/list/${payload.id}`,
+        payload
+      );
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

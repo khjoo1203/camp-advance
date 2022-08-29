@@ -16,11 +16,6 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const deleteHandler = (e) => {
-    e.preventDefault();
-    dispatch(__deleteMusic(id));
-    navigate(-1);
-  };
   const updateHandler = (e) => {
     e.preventDefault();
     if(!artistInput.current.value){return setFormHelper("You Must Enter Artist to Proceed")}
@@ -42,6 +37,13 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
     }
     dispatch(__updateMusic(updateLike))
   }
+
+  const deleteHandler = (e) => {
+    e.preventDefault()
+    dispatch(__deleteMusic(id))
+    navigate(-1)
+  }
+
   return (
     <StInfoContainer>
       <StAlbumSet>
@@ -68,18 +70,21 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
               ref={artistInput}
               type="text"
               placeholder="Artist"
+              defaultValue={artist}
             />
             <InputBox
               length="300px"
               ref={titleInput}
               type="text"
               placeholder="Title"
+              defaultValue={title}
             />
             <InputBox
               length="300px"
               ref={ImgUrlInput}
               type="text"
               placeholder="Cover URL"
+              defaultValue={coverUrl}
             />
             <AllRounderButton onClick={updateHandler} buttonName={"Submit"} />
           </EditDiv>
@@ -104,7 +109,7 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
         )}
       </StButtonSet>
       <StButtonSet>
-        <AllRounderButton buttonName={"Delete"} onClick={deleteHandler} />
+        <AllRounderButton buttonName={"Delete"} onClick={deleteHandler}/>
       </StButtonSet>
     </StInfoContainer>
   );

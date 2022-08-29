@@ -43,7 +43,7 @@
       "artist": "Avicii",
       "title": "The Nights",
       "coverUrl": "https://lh3.googleusercontent.com/b0XDjhG-zn3j3n5dTwXGUKcx7253KP2YRIMaidEDTuYhJFrcjwyjL0_8VCDp7nX4qhXVKJrw7UZqAsA=w544-h544-l90-rj",
-      "like": true,
+      "like": false,
       "comment": [],
       "requestId": "IkO8XhMEmCm1oHxmX4-O9",
       "signal": {}
@@ -53,7 +53,7 @@
       "artist": "Alan Walker",
       "title": "Faded",
       "coverUrl": "https://lh3.googleusercontent.com/LOmChJvAxiGyE8byffDiiRJkv4mdVjogS9GojnZcri0bpAzxrii0sXQci80injFNucK09a4LHKEjFWQVtA=w544-h544-l90-rj",
-      "like": true,
+      "like": false,
       "comment": []
     },
     {
