@@ -124,5 +124,4 @@ const musics = createSlice({
     },
   },
 });
-export const {} = musics.actions;
 export default musics.reducer;

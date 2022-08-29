@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import { __deleteMusic, __updateMusic } from "../redux/module/musicSlice";
 import AllRounderButton from "./AllRounderButton";
 
+
 const Info = ({ id, artist, title, coverUrl, like }) => {
   const [toggle, setToggle] = useState(false);
+  const [formHelper, setFormHelper] = useState(false);
   const titleInput = useRef(null);
   const artistInput = useRef(null);
   const ImgUrlInput = useRef(null);
@@ -22,14 +24,9 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
   };
   const updateHandler = (e) => {
     e.preventDefault();
-    if (
-      !artistInput.current.value ||
-      !titleInput.current.value ||
-      !ImgUrlInput.current.value
-    ) {
-      //TODO: FormHelp 멘트 추가하기
-      return;
-    }
+    if(!artistInput.current.value){return setFormHelper("You Must Enter Artist to Proceed")}
+    if(!titleInput.current.value){return setFormHelper("You Must Enter Title to Proceed")}
+    if(!ImgUrlInput.current.value){return setFormHelper("You Must Enter Image URL to Proceed")}
     const updateMusic = {
       artist: artistInput.current.value,
       title: titleInput.current.value,
@@ -57,7 +54,8 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
       <StButtonSet>
         {toggle ? (
           <EditDiv>
-            <h2>Edit</h2>
+            <h3>Edit</h3>
+            <FormHelper>{formHelper}</FormHelper>
             <InputBox
               length="300px"
               ref={artistInput}
@@ -76,7 +74,6 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
               type="text"
               placeholder="Cover URL"
             />
-            <div ref={FormHelp}></div>
             <AllRounderButton onClick={updateHandler} buttonName={"Submit"} />
           </EditDiv>
         ) : null}
@@ -85,6 +82,7 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
             onClick={(e) => {
               e.preventDefault();
               setToggle(!toggle);
+              setFormHelper("")
             }}
             buttonName={"Close"}
           />
@@ -152,3 +150,8 @@ const InputBox = styled.input`
 const EditDiv = styled.div`
   box-shadow: 5px 5px 10px #999;
 `;
+const FormHelper = styled.div`
+margin-top: 10px;
+font-size: 20px;
+color: #fa1e2d;
+`
