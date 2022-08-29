@@ -12,7 +12,6 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
   const titleInput = useRef(null);
   const artistInput = useRef(null);
   const ImgUrlInput = useRef(null);
-  const FormHelp = useRef(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +27,7 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
     if(!titleInput.current.value){return setFormHelper("You Must Enter Title to Proceed")}
     if(!ImgUrlInput.current.value){return setFormHelper("You Must Enter Image URL to Proceed")}
     const updateMusic = {
+      id,
       artist: artistInput.current.value,
       title: titleInput.current.value,
       coverUrl: ImgUrlInput.current.value,
@@ -35,6 +35,13 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
     dispatch(__updateMusic(updateMusic));
     setToggle(!toggle);
   };
+  const likeHandler = () => {
+    const updateLike = {
+      id,
+      like:!like
+    }
+    dispatch(__updateMusic(updateLike))
+  }
   return (
     <StInfoContainer>
       <StAlbumSet>
@@ -43,7 +50,7 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
         <StTiltle>{title}</StTiltle>
       </StAlbumSet>
       <StButtonSet>
-        {like ? <StLike>♥️</StLike> : <StLike>♡</StLike>}
+        {like ? <StLike onClick={likeHandler}>♥️</StLike> : <StLike onClick={likeHandler}>♡</StLike>}
         <AllRounderButton
           onClick={() => {
             navigate(-1);

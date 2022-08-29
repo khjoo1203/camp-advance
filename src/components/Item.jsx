@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,21 +8,19 @@ const Item = ({ id, artist, title, like, coverUrl }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //TODO:  LikeHandler => [on Hold]
-  const likeHandler = () => {
-    dispatch(__updateMusic(id, like));
-    console.log(id);
-    console.log(like);
+  const likeHandler = (e) => {
+    e.preventDefault()
+    const updateLike = {
+      id,
+      like: !like
+    }
+    dispatch(__updateMusic(updateLike))
   };
+
   return (
     <ItemDiv>
       {like ? (
-        <Like
-          //TODO: [on Hold]
-          onClick={likeHandler}
-        >
-          ♥️
-        </Like>
+        <Like onClick={likeHandler}>♥️</Like>
       ) : (
         <Like onClick={likeHandler}>♡</Like>
       )}

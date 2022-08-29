@@ -15,14 +15,6 @@ const Form = (props) => {
   const [formHelper, setFormHelper] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    // if (
-    //   !artistInput.current.value ||
-    //   !titleInput.current.value ||
-    //   !ImgUrlInput.current.value
-    // ){
-    //   //TODO: FormHelp 멘트 추가하기
-    //   return setFormHelper(true) 
-    // }
     if(!artistInput.current.value){return setFormHelper("You Must Enter Artist to Proceed")}
     if(!titleInput.current.value){return setFormHelper("You Must Enter Title to Proceed")}
     if(!ImgUrlInput.current.value){return setFormHelper("You Must Enter Image URL to Proceed")}
