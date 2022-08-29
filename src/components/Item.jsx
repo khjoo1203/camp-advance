@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,10 @@ import { __toggleLike } from "../redux/module/musicSlice";
 
 const Item = ({ music }) => {
   const dispatch = useDispatch();
-  const [likeNow, setLikeNow] = useState(music.like);
   const navigate = useNavigate();
   const likeHandler = () => {
-    dispatch(__toggleLike(id, setLikeNow(!likeNow)))
+    dispatch(__toggleLike(id, like))
     console.log(id)
-    console.log(likeNow)
     console.log(like)
   }
   const { id, artist, title, like, coverUrl } = music;

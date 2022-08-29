@@ -11,9 +11,9 @@ export const __fetchMusic = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get("http://localhost:3001/list");
-      return thunkAPI.fulfillWithValue(response.data)
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error)
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -74,12 +74,12 @@ const musicSlice = createSlice({
   },
   extraReducers: {
     [__fetchMusic.pending]: (state, action) => {
-      state.isLoading = true// 네트워크 요청이 시작되면 로딩상태를 true로 변경
-      console.log(state.isLoading)
+      state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
+      console.log(state.isLoading);
       console.log("pending");
     },
     [__fetchMusic.fulfilled]: (state, action) => {
-      state.isLoading = false// 네트워크 요청이 끝났으니, false로 변경
+      state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
       state.list = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣음
       console.log("fulfilled", state, action);
     },
@@ -99,6 +99,5 @@ const musicSlice = createSlice({
     },
   },
 });
-//https://velog.io/@kyungjune/reduxtoolkit과-thunk-기본개념-연습
 export const { addMusic, readMusic, delMusic } = musicSlice.actions;
 export default musicSlice.reducer;
