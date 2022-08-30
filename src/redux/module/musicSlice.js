@@ -58,21 +58,7 @@ export const __updateMusic = createAsyncThunk(
     }
   }
 );
-//댓글 등록
-export const __postComment = createAsyncThunk(
-  "music/POST_COMMENT",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await axios.post(
-        `http://localhost:3001/list/${payload.id}`,
-        payload
-      );
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+
 
 const musics = createSlice({
   name: "musics",

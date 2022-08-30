@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import musicReducer from '../module/musicSlice'
-
-
+import { combineReducers } from "redux";
+import musics from "../module/musicSlice";
+import comments from "../module/commentSlice";
+const rootReducer = combineReducers({
+  musics: musics,
+  comments: comments,
+});
 const store = configureStore({
-  reducer:{musics:musicReducer}
-})
-
-export default store
+  reducer: rootReducer
+});
+export default store;

@@ -1,30 +1,32 @@
-import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
-import { __postComment } from "../redux/module/musicSlice";
+import { __addComment } from "../redux/module/commentSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const CommentForm = () => {
   const {id} = useParams()
   const dispatch = useDispatch()
 
-  const [userName, onChangeUserNameHandler] = useInput()
-  const [content, onChangeContentHandler] = useInput()
+  const [userName, onChangeUserNameHandler, setUserName] = useInput()
+  const [content, onChangeContentHandler, setContent] = useInput()
   
   const commentHandler = () => {
+    if(!userName||!content) return
     const postComment = {
-      id,
-      commentId: nanoid(),
+      musicId: id,
       username: userName,
       content: content,
       commentLike: false
     }
-    dispatch(__postComment(postComment))
+    dispatch(__addComment(postComment))
     console.log(postComment)
+    setUserName('')
+    setContent('')
   }
+  
   return (
     <CommentFormBox>
       <div>

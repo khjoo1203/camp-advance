@@ -12,8 +12,7 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { isLoading, error, list } = useSelector((state) => state.musics);
-  const getMusic = list.find((music) => music.id === id); //crud의 read 필요없음.
-  // const getComment = getMusic.comment;
+  const getMusic = list.find((music) => music.id === id); 
   useEffect(() => {
     dispatch(__getMusic());
   }, [dispatch]);
@@ -32,7 +31,7 @@ const Detail = () => {
         <Info {...getMusic} />
       </DetailContent>
       <DetailContent>
-         <CommentList />
+         <CommentList getMusic={getMusic}/>
       </DetailContent>
       <CommentForm />
     </DetailPage>

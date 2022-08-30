@@ -24,8 +24,7 @@ const Form = (props) => {
       artist: artist,
       title: title,
       coverUrl: CoverUrl,
-      like: false,
-      comment: [],
+      like: false
     };
     dispatch(__addMusic(addMusic));
     setToggle(!toggle);
