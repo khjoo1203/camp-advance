@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { __getComment } from "../redux/module/commentSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const CommentList = () => {
+  const dispatch = useDispatch()
+  
+const getComment = useSelector((state)=>state.comments.comment)
+
+console.log(getComment)
+
+  useEffect(()=> {
+    dispatch(__getComment())
+  }, [dispatch])
+
+
   return (
     <>
       <CommentListBox>

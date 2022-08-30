@@ -7,14 +7,16 @@ import AllRounderButton from "./AllRounderButton";
 
 
 const Info = ({ id, artist, title, coverUrl, like }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
   const [toggle, setToggle] = useState(false);
   const [formHelper, setFormHelper] = useState(false);
   const titleInput = useRef(null);
   const artistInput = useRef(null);
   const ImgUrlInput = useRef(null);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const updateHandler = (e) => {
     e.preventDefault();

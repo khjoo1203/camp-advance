@@ -1,15 +1,39 @@
-import React from "react";
+import { nanoid } from "@reduxjs/toolkit";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { __postComment } from "../redux/module/musicSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const CommentForm = () => {
+  const {id} = useParams()
+  const dispatch = useDispatch()
+  const userNameInput = useRef(null)
+  const contentInput = useRef(null)
+
+  
+  const commentHandler = () => {
+    const usernameValue = userNameInput.current.value
+    const contentValue = contentInput.current.value
+    console.log(usernameValue, contentValue)
+    const postComment = {
+      id,
+      commentId: nanoid(),
+      username: usernameValue,
+      content: contentValue,
+      commentLike: false
+    }
+    dispatch(__postComment(postComment))
+
+  }
   return (
     <CommentFormBox>
       <div>
-        <CommentFormInput length="200px" type="text" placeholder="Username" />
-        <CommentFormInput length="400px" type="text" placeholder="comment" />
+        <CommentFormInput ref={userNameInput} length="200px" type="text" placeholder="Username" />
+        <CommentFormInput ref={contentInput} length="400px" type="text" placeholder="comment" />
       </div>
-      <AllRounderButton buttonName={"Submit"}/>
+      <AllRounderButton buttonName={"Submit"} onClick={commentHandler}/>
     </CommentFormBox>
   );
 };

@@ -60,11 +60,16 @@ export const __updateMusic = createAsyncThunk(
     }
   }
 );
-
+//댓글 등록
 export const __postComment = createAsyncThunk(
-  "music/postComment",
-  async (newComment) => {
-    const response = await axios.post("http://localhost:3001/list", newComment);
+  "music/POST_COMMENT",
+  async (payload, thunkAPI) => {
+    try {
+    const data = await axios.post(`http://localhost:3001/list/${payload.id}`, payload);
+    return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 
@@ -73,7 +78,7 @@ const musics = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    // TODO getMusic Thunk
+    // getMusic Thunk
     [__getMusic.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
     },
@@ -85,7 +90,7 @@ const musics = createSlice({
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣음
     },
-    // TODO addMusic Thunk
+    // addMusic Thunk
     [__addMusic.pending]: (state) => {
       state.isLoading = true;
     },
@@ -97,7 +102,7 @@ const musics = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // TODO deleteMusic Thunk
+    // deleteMusic Thunk
     [__deleteMusic.pending]: (state) => {
       state.isLoading = true;
     },
@@ -109,7 +114,7 @@ const musics = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // TODO updateMusic Thunk
+    // updateMusic Thunk
     [__updateMusic.pending]: (state) => {
       state.isLoading = true;
     },
@@ -120,6 +125,18 @@ const musics = createSlice({
       );
     },
     [__updateMusic.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // post Comment Thunk
+    [__postComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__postComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list.push(action.payload);
+    },
+    [__postComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
