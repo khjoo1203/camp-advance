@@ -1,72 +1,69 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-// import { addMusic } from "../redux/module/musicSlice"; //로컬
 import { __addMusic } from "../redux/module/musicSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import AllRounderButton from "./AllRounderButton";
+import useInput from "../hooks/useInput";
 
 const Form = (props) => {
-  const titleInput = useRef(null);
-  const artistInput = useRef(null);
-  const ImgUrlInput = useRef(null);
+  const [artist, onChangeArtistHandler] = useInput();
+  const [title, onChangeTitleHandler] = useInput();
+  const [CoverUrl, onChangeCoverUrlHandler] = useInput();
+
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const [formHelper, setFormHelper] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    if(!artistInput.current.value){return setFormHelper("You Must Enter Artist to Proceed")}
-    if(!titleInput.current.value){return setFormHelper("You Must Enter Title to Proceed")}
-    if(!ImgUrlInput.current.value){return setFormHelper("You Must Enter Image URL to Proceed")}
-    dispatch(
-      __addMusic({
-        id: nanoid(),
-        artist: artistInput.current.value,
-        title: titleInput.current.value,
-        coverUrl: ImgUrlInput.current.value,
-        like: false,
-        comment: [],
-      })
-    );
+    if(!artist){return setFormHelper("You Must Enter Artist to Proceed")}
+    if(!title){return setFormHelper("You Must Enter Title to Proceed")}
+    if(!CoverUrl){return setFormHelper("You Must Enter Image URL to Proceed")}
+    const addMusic = {
+      id: nanoid(),
+      artist: artist,
+      title: title,
+      coverUrl: CoverUrl,
+      like: false,
+      comment: [],
+    };
+    dispatch(__addMusic(addMusic));
     setToggle(!toggle);
-  }
+  };
   return (
     <>
-    <Formed>
-      {toggle ? (
-        <div>
-          <FormHelper>{formHelper}</FormHelper>
-          <InputBox
-            length="300px"
-            ref={artistInput}
-            type="text"
-            placeholder="Artist"
-          />
-          <InputBox
-            length="300px"
-            ref={titleInput}
-            type="text"
-            placeholder="Title"
-          />
-          <InputBox
-            length="500px"
-            ref={ImgUrlInput}
-            type="text"
-            placeholder="Cover URL"
-          />
-          <AllRounderButton
-            onClick={submitHandler}
-            buttonName={"Submit"}
-          />
-        </div>
-      ) : null}
-    </Formed>
+      <Formed>
+        {toggle ? (
+          <div>
+            <FormHelper>{formHelper}</FormHelper>
+            <InputBox
+              length="300px"
+              type="text"
+              placeholder="Artist"
+              onChange={onChangeArtistHandler}
+              />
+            <InputBox
+              length="300px"
+              type="text"
+              placeholder="Title"
+              onChange={onChangeTitleHandler}
+            />
+            <InputBox
+              length="500px"
+              type="text"
+              placeholder="Cover URL"
+              onChange={onChangeCoverUrlHandler}
+            />
+            <AllRounderButton onClick={submitHandler} buttonName={"Submit"} />
+          </div>
+        ) : null}
+      </Formed>
       {toggle ? (
         <AllRounderButton
           onClick={(e) => {
             e.preventDefault();
             setToggle(!toggle);
-            setFormHelper("")
+            setFormHelper("");
           }}
           buttonName={"Close"}
         />
@@ -106,7 +103,7 @@ const InputBox = styled.input`
   }
 `;
 const FormHelper = styled.div`
-margin-top: 10px;
-font-size: 20px;
-color: #fa1e2d;
-`
+  margin-top: 10px;
+  font-size: 20px;
+  color: #fa1e2d;
+`;

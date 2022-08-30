@@ -35,9 +35,7 @@ export const __deleteMusic = createAsyncThunk(
   "music/DELETE_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(
-        `http://localhost:3001/list/${payload}`
-      );
+      const data = await axios.delete(`http://localhost:3001/list/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -65,8 +63,11 @@ export const __postComment = createAsyncThunk(
   "music/POST_COMMENT",
   async (payload, thunkAPI) => {
     try {
-    const data = await axios.post(`http://localhost:3001/list/${payload.id}`, payload);
-    return thunkAPI.fulfillWithValue(data.data);
+      const data = await axios.post(
+        `http://localhost:3001/list/${payload.id}`,
+        payload
+      );
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -129,17 +130,10 @@ const musics = createSlice({
       state.error = action.payload;
     },
     // post Comment Thunk
-    [__postComment.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__postComment.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.list.push(action.payload);
-    },
-    [__postComment.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // [__postComment.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   const index = state.list.findIndex(music=>music.id === action.data.id)
+    // },
   },
 });
 export default musics.reducer;
