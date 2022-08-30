@@ -45,7 +45,7 @@ export const __deleteMusic = createAsyncThunk(
   }
 );
 
-//좋아요 토글
+//데이터 수정
 export const __updateMusic = createAsyncThunk(
   "music/UPDATE_MUSIC",
   async (payload, thunkAPI) => {
