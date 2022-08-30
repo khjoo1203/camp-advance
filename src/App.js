@@ -1,14 +1,15 @@
-import './App.css';
-import Main from './page/Main';
-import Detail from './page/Detail'
-import { Routes, Route} from 'react-router-dom'
+import "./App.css";
+import Main from "./page/Main";
+import Detail from "./page/Detail";
+import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-      <Route path='/' element={<Main/>}/>
-      <Route path='/detail/:id' element={<Detail/>}/>
+        <Route path="/" element={<Main />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </div>
   );
