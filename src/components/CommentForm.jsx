@@ -1,40 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 import { __addComment } from "../redux/module/commentSlice";
 import AllRounderButton from "./AllRounderButton";
 
 const CommentForm = () => {
-  const {id} = useParams()
-  const dispatch = useDispatch()
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [formHelper, setFormHelper] = useState(false);
+  const [userName, onChangeUserNameHandler, setUserName] = useInput();
+  const [content, onChangeContentHandler, setContent] = useInput();
 
-  const [userName, onChangeUserNameHandler, setUserName] = useInput()
-  const [content, onChangeContentHandler, setContent] = useInput()
-  
   const commentHandler = () => {
-    if(!userName||!content) return
+    if (!userName) {return setFormHelper("You Must Enter Username to Proceed")}
+    if (!content) {return setFormHelper("You Must Enter Comment to Proceed")}
     const postComment = {
       musicId: id,
       username: userName,
       content: content,
-      commentLike: false
-    }
-    dispatch(__addComment(postComment))
-    console.log(postComment)
-    setUserName('')
-    setContent('')
-  }
-  
+      commentLike: false,
+    };
+    dispatch(__addComment(postComment));
+    console.log(postComment);
+    setUserName("");
+    setContent("");
+    setFormHelper(false)
+  };
+
   return (
-    <CommentFormBox>
-      <div>
-        <CommentFormInput length="200px" type="text" placeholder="Username" value={userName} onChange={onChangeUserNameHandler}/>
-        <CommentFormInput length="400px" type="text" placeholder="comment" value={content} onChange={onChangeContentHandler}/>
-      </div>
-      <AllRounderButton buttonName={"Submit"} onClick={commentHandler}/>
-    </CommentFormBox>
+      <CommentFormBox>
+      <FormHelper>{formHelper}</FormHelper>
+        <div>
+          <CommentFormInput
+            length="200px"
+            type="text"
+            placeholder="Username"
+            value={userName || ""}
+            onChange={onChangeUserNameHandler}
+          />
+          <CommentFormInput
+            length="400px"
+            type="text"
+            placeholder="Comment"
+            value={content || ""}
+            onChange={onChangeContentHandler}
+          />
+        </div>
+        <AllRounderButton buttonName={"Submit"} onClick={commentHandler} />
+      </CommentFormBox>
   );
 };
 
@@ -57,4 +72,9 @@ const CommentFormInput = styled.input`
   &::placeholder {
     color: #aaa;
   }
+`;
+const FormHelper = styled.div`
+  margin-top: 10px;
+  font-size: 20px;
+  color: #fa1e2d;
 `;

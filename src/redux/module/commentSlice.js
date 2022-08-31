@@ -38,7 +38,7 @@ export const __updateComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.patch(
-        `http://localhost:3001/list/${payload.id}`,
+        COMMENT_URL+'/'+payload.id,
         payload
       );
       return thunkAPI.fulfillWithValue(data.data);
@@ -52,7 +52,7 @@ export const __deleteComment = createAsyncThunk(
   "comment/DELETE_COMMENT",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(`http://localhost:3001/list/${payload}`);
+      const data = await axios.delete(COMMENT_URL+'/'+payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -88,7 +88,21 @@ const comments = createSlice({
       state.isLoading = false; 
       state.error = action.payload;
     },
+    [__updateComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list = state.list.map((music) =>
+        music.id === action.payload.id ? { ...action.payload } : music
+      );
+    },
+    [__updateComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
+  
 });
 
 export default comments.reducer;

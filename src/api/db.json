@@ -15,48 +15,5 @@
       "like": false
     }
   ],
-  "comment": [
-    {
-      "musicId": "6Z1-ZPVCa9yYNOdOhQcc4",
-      "username": "ㅁㄴㅇ",
-      "content": "ㅁㄴㅇ",
-      "commentLike": false,
-      "id": "DjK1fNI"
-    },
-    {
-      "musicId": "8RcOIAtw0tGNhwOWKnED3",
-      "username": "asd",
-      "content": "ads",
-      "commentLike": false,
-      "id": "RbUdWXt"
-    },
-    {
-      "musicId": "8RcOIAtw0tGNhwOWKnED3",
-      "username": "asd",
-      "content": "ads",
-      "commentLike": false,
-      "id": "gIs9hug"
-    },
-    {
-      "musicId": "8RcOIAtw0tGNhwOWKnED3",
-      "username": "fqqwf",
-      "content": "qwd",
-      "commentLike": false,
-      "id": "D8jfjX3"
-    },
-    {
-      "musicId": "8RcOIAtw0tGNhwOWKnED3",
-      "username": "123e2",
-      "content": "qsw2e1",
-      "commentLike": false,
-      "id": "sC_q5Ot"
-    },
-    {
-      "musicId": "6Z1-ZPVCa9yYNOdOhQcc4",
-      "username": "이름",
-      "content": "댓글",
-      "commentLike": false,
-      "id": "IzMUbKK"
-    }
-  ]
+  "comment": []
 }
