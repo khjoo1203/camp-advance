@@ -12,18 +12,16 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { isLoading, error, list } = useSelector((state) => state.musics);
-  const getMusic = list.find((music) => music.id === id); 
+  const getMusic = list.find((music) => music.id === id);
   useEffect(() => {
     dispatch(__getMusic());
   }, [dispatch]);
-
   if (isLoading) {
     return <div>Loading . . .</div>;
   }
   if (error) {
     return <div>{error.message}</div>;
   }
-
   return (
     <DetailPage>
       <Header />
@@ -31,7 +29,7 @@ const Detail = () => {
         <Info {...getMusic} />
       </DetailContent>
       <DetailContent>
-         <CommentList getMusic={getMusic}/>
+        <CommentList id={id} />
       </DetailContent>
       <CommentForm />
     </DetailPage>

@@ -5,9 +5,7 @@ import Comment from "./Comment";
 
 const CommentList = ({id}) => {
   const dispatch = useDispatch();
-  console.log(id)
   const getComment = useSelector((state) => state.comments.list.filter((list)=>list.musicId === id));
-  console.log(getComment);
   
   // const getComment = list.find((comment)=>comment.musicId===id)
   useEffect(() => {
@@ -23,4 +21,3 @@ const CommentList = ({id}) => {
 };
 
 export default CommentList;
-
