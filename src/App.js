@@ -12,8 +12,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/page" element={<Pagenation />} />
-        <Route path="/inf" element={<InfiniteScroll />} />
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </div>

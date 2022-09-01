@@ -1,40 +1,64 @@
 import styled from "styled-components";
 import Item from "./Item";
 import {  useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { __getMusic } from "../redux/module/musicSlice";
+import { getItems } from "../api/api"; 
 
 const List = () => {
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [ref, inView] = useInView({
+    threshold:0.8
+  });
 
-  const musicList = useSelector(state=>state.musics.list) 
-  const dispatch = useDispatch()
-  const [ref, inView] = useInView()
+  const loadItems = useCallback(async () => {
+    setLoading(true);
+    await getItems(page, 3).then((res) => {
+      setItems((prevState) => [...prevState, res]);
+    });
+    setLoading(false);
+  }, [page]);
 
+  
+  console.log(items);
 
-  useEffect(()=>{
-    if(musicList.length === 0){
-      console.log('music lists on load')
-      return
+  // `getItems` 가 바뀔 때 마다 함수 실행
+  useEffect(() => {
+    loadItems();
+  }, [loadItems]);
+
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage((prevState) => prevState + 1);
     }
-  },[dispatch, musicList.length])
+  }, [inView, loading]);
+  const find = items.map(item=>
+    item.map(item=>item.id))
 
-  useEffect(()=>{
-    if(musicList.length !==0 && inView){
-      console.log('inf scroll after the first Load')
-      dispatch(__getMusic())
-    }
-  },[dispatch, inView, musicList.length])
-  console.log(musicList)
+  console.log(find)
+
   return (
     <ListDiv>
-      {musicList.map((music)=>(
-        <Item {...music} key={music.id}/>
-      ))}
-      <div ref={ref}/>
+      {items.map(music=>
+        music.map(music=>(
+          <ItemDiv ref={ref}>
+            <Item {...music} key={music.id} />
+          </ItemDiv>
+        ))
+      )}
     </ListDiv>
   );
 };
+const ItemDiv = styled.div`
+  background-color: white;
+  margin: 20px auto;
+  width: 250px;
+  height: 400px;
+  box-shadow: 1px 1px 15px grey;
+`;
 const ListDiv = styled.div`
   width: 800px;
   margin: auto;

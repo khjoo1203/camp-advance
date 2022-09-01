@@ -13,7 +13,7 @@ export const __getMusic = createAsyncThunk(
   "music/GET_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3001/list", {
+      const data = await axios.get(process.env.REACT_APP_SERVER_URL_MUSIC, {
         params: {
           page: 10
         }
@@ -29,7 +29,7 @@ export const __addMusic = createAsyncThunk(
   "music/ADD_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post("http://localhost:3001/list", payload);
+      const data = await axios.post(process.env.REACT_APP_SERVER_URL_MUSIC, payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -41,7 +41,7 @@ export const __deleteMusic = createAsyncThunk(
   "music/DELETE_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(`http://localhost:3001/list/${payload}`);
+      const data = await axios.delete(process.env.REACT_APP_SERVER_URL_MUSIC+"/"+payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +55,7 @@ export const __updateMusic = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.patch(
-        `http://localhost:3001/list/${payload.id}`,
+        process.env.REACT_APP_SERVER_URL_MUSIC+"/"+payload.id,
         payload
       );
       return thunkAPI.fulfillWithValue(data.data);

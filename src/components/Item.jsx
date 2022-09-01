@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __updateMusic } from "../redux/module/musicSlice";
 
-const Item = ({ id, artist, title, like, coverUrl }) => {
+const Item = React.forwardRef((music, ref) => {
+  const { id, artist, title, like, coverUrl } = music
+  console.log(artist)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const Item = ({ id, artist, title, like, coverUrl }) => {
   };
 
   return (
-    <ItemDiv>
+    <div ref={ref}>
       {like ? (
         <Like onClick={likeHandler}>♥️</Like>
       ) : (
@@ -33,16 +35,10 @@ const Item = ({ id, artist, title, like, coverUrl }) => {
       />
       <Title>{title}</Title>
       <Artist>{artist}</Artist>
-    </ItemDiv>
+    </div>
   );
-};
-const ItemDiv = styled.div`
-  background-color: white;
-  margin: 20px auto;
-  width: 250px;
-  height: 400px;
-  box-shadow: 1px 1px 15px grey;
-`;
+});
+
 const CoverImg = styled.img`
   width: 250px;
   height: 250px;
