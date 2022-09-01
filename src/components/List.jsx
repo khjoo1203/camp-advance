@@ -21,8 +21,7 @@ const List = () => {
     setLoading(false);
   }, [page]);
 
-  
-  console.log(items);
+
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
@@ -38,7 +37,6 @@ const List = () => {
   const find = items.map(item=>
     item.map(item=>item.id))
 
-  console.log(find)
 
   return (
     <ListDiv>
