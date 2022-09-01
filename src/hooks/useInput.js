@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const useInput = () => {
 	// 2. value는 useState로 관리하고, 
@@ -6,7 +6,6 @@ const useInput = () => {
   useEffect(() => {
     setValue();
   }, []);
-  const ref = useRef(null)
 	// 3. 핸들러 로직도 구현합니다.
   const handler = (e) => {
     setValue(e.target.value);

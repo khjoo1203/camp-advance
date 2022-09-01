@@ -9,7 +9,7 @@ import AllRounderButton from "./AllRounderButton";
 const CommentForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [formHelper, setFormHelper] = useState(false);
+  const [formHelper, setFormHelper] = useState("");
   const [userName, onChangeUserNameHandler, setUserName] = useInput();
   const [content, onChangeContentHandler, setContent] = useInput();
 
@@ -26,7 +26,7 @@ const CommentForm = () => {
     console.log(postComment);
     setUserName("");
     setContent("");
-    setFormHelper(false)
+    setFormHelper("")
   };
 
   return (

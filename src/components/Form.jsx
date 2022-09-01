@@ -28,6 +28,7 @@ const Form = (props) => {
     };
     dispatch(__addMusic(addMusic));
     setToggle(!toggle);
+    alert(title+" by "+artist+" has successfully Registered!")
   };
   return (
     <>

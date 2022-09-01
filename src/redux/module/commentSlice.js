@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const COMMENT_URL = "http://localhost:3001/comment";
 
 const initialState = {
-  list: [],
+  comments: [],
   isLoading: false,
   error: null,
 };
@@ -70,7 +70,7 @@ const comments = createSlice({
     },
     [__getComment.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-      state.list = action.payload; // Store에 있는 list에 서버에서 가져온 music를 넣음
+      state.comments = action.payload; // Store에 있는 list에 서버에서 가져온 music를 넣음
     },
     [__getComment.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
@@ -82,7 +82,7 @@ const comments = createSlice({
       state.isLoading = true; 
     },
     [__addComment.fulfilled]: (state, action) => {
-      state.list.push(action.payload);
+      state.comments.push(action.payload);
     },
     [__addComment.rejected]: (state, action) => {
       state.isLoading = false; 
@@ -93,7 +93,7 @@ const comments = createSlice({
     },
     [__updateComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.list = state.list.map((music) =>
+      state.comments = state.comments.map((music) =>
         music.id === action.payload.id ? { ...action.payload } : music
       );
     },

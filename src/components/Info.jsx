@@ -49,11 +49,13 @@ const Info = ({ id, artist, title, coverUrl, like }) => {
       like:!like
     }
     dispatch(__updateMusic(updateLike))
+    if(!like)alert("liked!")
   }
-
+  
   const deleteHandler = (e) => {
     e.preventDefault()
     dispatch(__deleteMusic(id))
+    alert(title+" has been successfully deleted!")
     navigate(-1)
   }
 
@@ -144,6 +146,7 @@ const StAlbumSet = styled.div`
 const StAlbumImg = styled.img`
   width: 450px;
   height: 450px;
+  object-fit: cover;
 `;
 
 const StArtist = styled.h2``;

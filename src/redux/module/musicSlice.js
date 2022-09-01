@@ -1,17 +1,23 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
   list: [],
   isLoading: false,
-  error: null,
+  error: false,
+  isDone:false
 };
 //db에서 데이터 가져옴
 export const __getMusic = createAsyncThunk(
   "music/GET_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3001/list");
+      const data = await axios.get("http://localhost:3001/list", {
+        params: {
+          page: 10
+        }
+      });
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -68,14 +74,17 @@ const musics = createSlice({
     // getMusic Thunk
     [__getMusic.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
+      state.isDone = false; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
+      state.error = null; // 네트워크 요청이 시작되면 로딩상태를 true로 변경
     },
     [__getMusic.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-      state.list = action.payload; // Store에 있는 list에 서버에서 가져온 music를 넣음
+      state.isDone = true; // 네트워크 요청이 끝났으니, false로 변경
+      state.list = [...state.list].concat(action.payload); // Store에 있는 list에 서버에서 가져온 music를 넣음
     },
     [__getMusic.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
-      state.error = action.payload; // catch 된 error 객체를 state.error에 넣음
+      state.error = action.error; // catch 된 error 객체를 state.error에 넣음
     },
     // addMusic Thunk
     [__addMusic.pending]: (state) => {

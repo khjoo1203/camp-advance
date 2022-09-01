@@ -15,6 +15,7 @@ const Item = ({ id, artist, title, like, coverUrl }) => {
       like: !like
     }
     dispatch(__updateMusic(updateLike))
+    if(!like)alert("liked!")
   };
 
   return (
@@ -46,6 +47,7 @@ const CoverImg = styled.img`
   width: 250px;
   height: 250px;
   margin: 20px auto 0;
+  object-fit: cover;
 `;
 const Title = styled.h2`
   font-size: 17px;

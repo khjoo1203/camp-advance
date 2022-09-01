@@ -26,6 +26,7 @@ const Comment = ({ username, content, commentLike, id }) => {
       commentLike: !commentLike,
     };
     dispatch(__updateComment(toggleLike));
+    if(!commentLike)alert("liked Comment!")
   };
   const updateHandler = () => {
     if (!updateUsername) {return setFormHelper("You Must Enter Username to Proceed")}
@@ -42,6 +43,7 @@ const Comment = ({ username, content, commentLike, id }) => {
     dispatch(__deleteComment(id))
     navigate(0)
   }
+  
   return (
     <>
       <FormHelper>{formHelper}</FormHelper>
