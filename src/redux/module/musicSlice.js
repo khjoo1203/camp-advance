@@ -41,7 +41,7 @@ export const __deleteMusic = createAsyncThunk(
   "music/DELETE_MUSIC",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(process.env.REACT_APP_SERVER_URL_MUSIC+"/"+payload);
+      const data = await axios.delete(process.env.REACT_APP_SERVER_URL_MUSIC+`/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +55,7 @@ export const __updateMusic = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.patch(
-        process.env.REACT_APP_SERVER_URL_MUSIC+"/"+payload.id,
+        process.env.REACT_APP_SERVER_URL_MUSIC+`/${payload.id}`,
         payload
       );
       return thunkAPI.fulfillWithValue(data.data);
